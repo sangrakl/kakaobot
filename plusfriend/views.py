@@ -12,6 +12,7 @@ def on_message(request):
     user_key = request.JSON['user_key']
     type = request.JSON['type']
     content = request.JSON['content'] # photo 타입일 경우에는 이미지 URL
+    print(user_key, type, content)
 
     if content.startswith('멜론검색:'):
         query = content[6:]

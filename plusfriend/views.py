@@ -13,7 +13,6 @@ def keyboard(request):
         }
     )
 
-@csrf_exempt
 def message(request):
 
     return JsonResponse(

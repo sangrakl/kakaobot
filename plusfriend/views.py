@@ -19,7 +19,7 @@ def message(request):
         {
             'message': {
                 'text': '내가원하는 메세지'
-            }
+            },
             'keyboard': {
                 'type': 'buttons',
                 'buttons': ['메시지벝믄1', '메시지벝믄2', '메시지벝믄3',]

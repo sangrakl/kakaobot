@@ -1,29 +1,38 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 
-# Create your views here.
+from .decorators import bot
+from . import functions
+@bot
+def on_init(request):
+    return {'type': 'text'}
 
-def keyboard(request):
+@bot
+def on_message(request):
+    user_key = request.JSON['user_key']
+    type = request.JSON['type']
+    content = request.JSON['content'] # photo 타입일 경우에는 이미지 URL
 
-    return JsonResponse(
-        {
-        'type' : 'buttons',
-        'buttons': ['버튼1', '버튼2', '버튼3',]
+    if content.startswith('멜론검색:'):
+        query = content[6:]
+        response = '멜론 "{}" 검색결과\n\n'.format(query) + functions.melon_search(query)
+    else:
+        response = '지원하는 명령어가 아닙니다.'
+
+    return {
+        'message': {
+            'text': response,
         }
-    )
+    }
 
-def message(request):
+@bot
+def on_added(request):
+    user_key = request.JSON['user_key']
 
-    return JsonResponse(
-        {
-            'message': {
-                'text': '내가원하는 메세지'
-            },
-            'keyboard': {
-                'type': 'buttons',
-                'buttons': ['버튼1', '메시지벝믄2', '메시지벝믄3',]
-            }
+@bot
+def on_block(request, user_key):
+    pass
 
-        }
-    )
+@bot
+def on_leave(request, user_key):
+    pass

@@ -23,7 +23,7 @@ def message(request):
             },
             'keyboard': {
                 'type': 'buttons',
-                'buttons': ['메시지벝믄1', '메시지벝믄2', '메시지벝믄3',]
+                'buttons': ['버튼1', '메시지벝믄2', '메시지벝믄3',]
             }
 
         }
